@@ -1,0 +1,16 @@
+﻿@model IEnumerable<TestNet.Entities.FileData>
+@{
+    ViewData["Title"] = "Download";
+}
+
+<h1>Download</h1>
+
+<div>
+
+    @foreach(var item in Model )
+    {
+        <a href="/Archives/@item.Name@item.ArchiveType">@item.Name</a> <br/>
+    }
+
+</div>
+

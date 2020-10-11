@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="text-center">
+    <label>Upload file</label>
+    <input type="file" id="inputForUpload"><br /><br /><br /><br /><br /><br />
+    <button typeof="button" onclick="sendFile()">Upload File</button><br /><br /><br /><br /><br /><br />
+    <a href="@ConfigSettings.MCVDownload">View archives</a>
+
+</div>
+
+@section scripts
+{
+
+    <script>
+
+        var apiRoute = '@ConfigSettings.CreateRoute';        
+
+        async function sendFile() {
+            let inputFile = document.getElementById('inputForUpload');
+            let fileName = inputFile.value;
+
+            if (fileName.endsWith('.lnk') || fileName.endsWith('exe')) {
+                alert("This type file is not supported for upload");
+                return;
+            }       
+          
+            let file = inputFile.files[0];
+
+            if (file === undefined || file === null)
+                return;
+
+            let form = new FormData();
+            form.append("file", file);
+
+            let ret = await Calls.PostEndpoint(apiRoute, form);
+
+            alert(ret);
+        }
+
+    </script>
+
+}
